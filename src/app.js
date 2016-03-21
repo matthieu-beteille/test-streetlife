@@ -33,12 +33,12 @@ function update (action, model) {
     case actions.MOVE:
       const catAndOwner = model.catsAndOwners[action.params.index]
       let newStations = model.stations
-      let newCatAndOwner
+      let newModel
 
       if (catAndOwner.isCatFound) {
-        return model
+        newModel = model
       } else {
-        newCatAndOwner = CatAndOwner.update(
+        let newCatAndOwner = CatAndOwner.update(
           {
             type: CatAndOwner.actions.TRAVEL_OWNER,
             params: { stations: action.params.stations }
@@ -60,13 +60,14 @@ function update (action, model) {
           console.log(`Owner ${action.params.index} found cat ${action.params.index} - ${newCatAndOwner.cat.station.name} is now closed.`)
           newStations = _.mapObject(model.stations, station => station.id === newStation.id ? newStation : station)
         }
+
+        newModel = Object.assign({}, model, {
+          stations: newStations,
+          catsAndOwners: helpers.updateIn(model.catsAndOwners, action.params.index, newCatAndOwner)
+        })
       }
 
-      return Object.assign({}, model, {
-        stations: newStations,
-        catsAndOwners: helpers.updateIn(model.catsAndOwners, action.params.index, newCatAndOwner)
-      })
-
+      return newModel
   }
 }
 
@@ -75,9 +76,10 @@ function run (connections, stations, total, iterationsNumber) {
   var appModel = initApp(connections, stations, total)
   var iterations = 0
   var isFinished = false
+  const range = _.range(total)
 
   while (!isFinished) {
-    _.range(total).forEach((value, idx) => {
+    range.forEach((value, idx) => {
       appModel = update({
         type: actions.MOVE,
         params: {

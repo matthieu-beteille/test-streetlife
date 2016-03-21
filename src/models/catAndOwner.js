@@ -34,10 +34,12 @@ function travelOwner (previousStation, currentStation, stations) {
 
       return (!isPreviousStation && !station.isClosed)
     })
-
-  return nextPossibleStations.length > 0
+  const isBlocked = nextPossibleStations.length === 0
+  const isPreviousStationOpen = (previousStation && !previousStation.isClosed)
+  // if every station is closed the owner goes back to his previous station if it's open
+  return !isBlocked
     ? nextPossibleStations[helpers.getRandomNumber(0, nextPossibleStations.length - 1)]
-    : currentStation
+    : isPreviousStationOpen ? previousStation : currentStation
 }
 
 // make the cat travel and returns his new station

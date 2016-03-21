@@ -1,3 +1,5 @@
+'use strict'
+
 const _ = require('underscore')
 
 // simple function returning a random number between a and b (impure)
