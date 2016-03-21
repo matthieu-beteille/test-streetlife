@@ -1,8 +1,8 @@
 'use strict'
 
-const stations = require('./tfl_stations.json')
-const connections = require('./tfl_connections.json')
-const app = require('./app.js')
+const stations = require('./map/tfl_stations.json')
+const connections = require('./map/tfl_connections.json')
+const app = require('./src/app.js')
 const iterationsNumber = 20000
 
 if (process.argv.length < 3) {

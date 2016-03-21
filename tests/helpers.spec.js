@@ -1,9 +1,9 @@
 const assert = require('assert')
 const _ = require('underscore')
-const helpers = require('../helpers')
-const App = require('../app')
-const stations = require('../tfl_stations.json')
-const connections = require('../tfl_connections.json')
+const helpers = require('../src/helpers')
+const App = require('../src/app')
+const stations = require('../map/tfl_stations.json')
+const connections = require('../map/tfl_connections.json')
 
 describe('helpers', function () {
   describe('getRandomNumber()', function () {
