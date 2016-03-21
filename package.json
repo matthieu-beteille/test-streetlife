@@ -1,0 +1,21 @@
+{
+  "name": "test-streetlife",
+  "version": "1.0.0",
+  "description": "One of the topics streetlife users talk about is missing cats. Cats run away from their houses all the time and that's really inconvenient for their owners.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthieu-beteille/test-streetlife.git"
+  },
+  "author": "Matthieu Béteille",
+  "license": "ISC",
+  "scripts": {
+    "start": "node ./index.js" ,
+    "test": "./node_modules/mocha/bin/mocha ./tests/helpers.spec.js"
+  },
+  "homepage": "https://gist.github.com/f90adff6bf83736b2a23",
+  "dependencies": {
+    "mocha": "2.4.5",
+    "underscore": "1.8.3"
+  }
+}
